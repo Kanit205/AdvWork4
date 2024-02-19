@@ -1,9 +1,22 @@
-<div>
+<div class="nav">
   title
   <input type="text" #s>
   year
   <input type="text" #y>
-  <button (click)="findSerch(s.value, y.value)">serch</button>
+  id
+  <input type="text" #i>
+  <button (click)="findSerch(s.value, y.value, i.value)">Serch</button>
+</div>
+
+<div *ngIf="serchBy === 1;">
+  <div *ngFor="let serch of find?.Search">
+    {{serch.Title}}
+  </div>
+</div>
+<div *ngIf="serchBy === 2">
+  <div>
+    {{findID?.Title}}
+  </div>
 </div>
 
 
