@@ -63,4 +63,10 @@ export class SerchComponent {
     }
     console.log(this.find);
   }
+
+  async findSerchID (i: string) {
+    this.findID = await this.OmdbService.getSerchID(i);
+    this.serchBy = 3;
+    console.log(this.findID);
+  }
 }

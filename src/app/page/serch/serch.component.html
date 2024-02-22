@@ -11,27 +11,31 @@
           (keyup.enter)="findSerch(s.value, y.value )">
       </div>
       <div>
-        <input type="text" class="SearchBar oswald-font" placeholder="Year" #y
+        <input type="text" class="SearchBar oswald-font" placeholder="Year" #y style="width: 6.5vw;"
           (keyup.enter)="findSerch(s.value, y.value)">
       </div>
       <div>
-        <button (click)="findSerch(s.value, y.value)" class="SearchBtn oswald-font"
-          style="cursor: pointer; font-weight: 600;">Serch</button>
+        <button (click)="findSerch(s.value, y.value)" class="SearchBtn oswald-font">
+          <span style="font-weight: 600; font-size: 17px;">Serch</span>
+        </button>
       </div>
     </div>
   </div>
 
   <div *ngIf="serchBy === 1">
     <div class="center-flex-row">
-      <div class="center-flex-row" style="flex-wrap: wrap; width: 65%;">
+      <div class="center-flex-row" style="flex-wrap: wrap; width: 66%;">
         <div *ngFor="let serch of find?.Search">
-          <div class="img-layout">
-            <img src="{{serch.Poster}}" alt="" style="object-fit: cover; width: 200px; height: 300px;">
+          <div class="search-img-lay-1 img-hov" (click)="findSerchID(serch.imdbID)">
+            <div class="img-layout">
+              <img src="{{serch.Poster}}" alt="" class="fit-cover-img">
+            </div>
+            <h3 style="color: #cecece; margin-left: 2.5rem;">{{serch.Title}}</h3>
           </div>
         </div>
       </div>
     </div>
-    <div class="center-flex-row" style="margin-top: 2rem;">
+    <div class="center-flex-row" style="margin-top: 3rem;">
       <div *ngFor="let i of counter">
         <span class="PageBtn" (click)="nextPage(s.value, y.value, i)">{{i}}</span>
       </div>
@@ -39,15 +43,68 @@
   </div>
 
   <div *ngIf="serchBy === 2">
-    <div class="img-layout" style="">
-      <div style="display: flex; flex-direction: column; justify-content: center;">
-        <img src="{{findID?.Poster}}" alt="" style="object-fit: cover; width: 200px; height: 300px;">
-        <span (click)="nextPage(s.value, y.value, 1)">1</span>
+    <div class="img-layout2" style="justify-content: center;">
+      <div class="flex-column img-hov ">
+        <div class="center-flex-column">
+          <img src="{{findID?.Poster}}" alt="" class="fit-cover-img">
+        </div>
+        <h3 style="color: #cecece;">{{findID?.Title}}</h3>
       </div>
     </div>
   </div>
 
   <div *ngIf="serchBy === 3">
-
+    <div style="margin-top: 4rem;">
+      <div class="center-flex-row" style="margin-top: 3rem;">
+        <div>
+          <div>
+            <img src="{{findID?.Poster}}" alt="">
+          </div>
+          <div style="width: 14vw; margin-top: 1rem; color: #cecece;">
+            <span>{{findID?.Plot}}</span>
+          </div>
+        </div>
+        <div class="flex-column" style="margin-left: 2.5rem;">
+          <div   style="color: #cecece; width: 20vw;">
+            <h1>
+              <span>{{findID?.Title}}</span>
+              <span style="margin-left: 0.5rem; color: #f5c518;">( {{findID?.Year}} )</span>
+              <hr>
+            </h1>
+          </div>
+          <div class="flex-column">
+            <h2 style="margin: 0px; color: #f5c518; margin-bottom: 1rem;">{{findID?.Genre}}</h2>
+            <div style="color: #cecece;" class="flex-row">
+              <h2 style="margin: 0px;">Rated :</h2>
+              <h2 style="margin: 0px; margin-left: 0.5rem; color: #f5c518;">{{findID?.Rated}}</h2>
+            </div>
+            <div style="margin-bottom: 1rem;">
+              <h2 style="color: #cecece; margin: 0px;">Time : {{findID?.Runtime}}</h2>
+            </div>
+            <div *ngFor="let rate of findID?.Ratings" style="display: flex;">
+              <h2 style="margin: 0px;">
+                <span style="color: #cecece;">{{rate.Source}} : </span>
+                <span style="color: #1979ad; margin-left: 0.5rem;">{{rate.Value}}</span>
+              </h2>
+            </div>
+            <hr width="350vw" style="margin: 0px; margin-top: 1rem;">
+            <div style="display: flex; flex-direction: column;">
+              <h3 style="margin: 0px; margin-top: 1rem;">
+                <span style="color: #cecece;">Director : </span>
+                <span style="color: #f5c518;">{{findID?.Director}}</span>
+              </h3>
+              <h3 style="margin: 0px;">
+                <span style="color: #cecece;">Writer : </span>
+                <span style="color: #f5c518;">{{findID?.Writer}}</span>
+              </h3>
+              <h3 style="margin: 0px;">
+                <span style="color: #cecece;">Actors : </span>
+                <span style="color: #f5c518;">{{findID?.Actors}}</span>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
