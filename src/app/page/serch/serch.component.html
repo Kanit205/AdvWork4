@@ -1,22 +1,53 @@
-<div class="nav">
-  title
-  <input type="text" #s>
-  year
-  <input type="text" #y>
-  id
-  <input type="text" #i>
-  <button (click)="findSerch(s.value, y.value, i.value)">Serch</button>
-</div>
+<app-header></app-header>
 
-<div *ngIf="serchBy === 1;">
-  <div *ngFor="let serch of find?.Search">
-    {{serch.Title}}
+<div class="oswald-font">
+  <div class="serch">
+    <div class="center-flex">
+      <h2 style="color: #f5c518;">OMDb Search Movie</h2>
+    </div>
+    <div class="center-flex">
+      <div>
+        <input type="text" class="SearchBar oswald-font" placeholder="Search" style="width: 15vw;" #s
+          (keyup.enter)="findSerch(s.value, y.value )">
+      </div>
+      <div>
+        <input type="text" class="SearchBar oswald-font" placeholder="Year" #y
+          (keyup.enter)="findSerch(s.value, y.value)">
+      </div>
+      <div>
+        <button (click)="findSerch(s.value, y.value)" class="SearchBtn oswald-font"
+          style="cursor: pointer; font-weight: 600;">Serch</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="serchBy === 1">
+    <div class="center-flex-row">
+      <div class="center-flex-row" style="flex-wrap: wrap; width: 65%;">
+        <div *ngFor="let serch of find?.Search">
+          <div class="img-layout">
+            <img src="{{serch.Poster}}" alt="" style="object-fit: cover; width: 200px; height: 300px;">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="center-flex-row" style="margin-top: 2rem;">
+      <div *ngFor="let i of counter">
+        <span class="PageBtn" (click)="nextPage(s.value, y.value, i)">{{i}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="serchBy === 2">
+    <div class="img-layout" style="">
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <img src="{{findID?.Poster}}" alt="" style="object-fit: cover; width: 200px; height: 300px;">
+        <span (click)="nextPage(s.value, y.value, 1)">1</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="serchBy === 3">
+
   </div>
 </div>
-<div *ngIf="serchBy === 2">
-  <div>
-    {{findID?.Title}}
-  </div>
-</div>
-
-

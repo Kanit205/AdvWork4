@@ -10,12 +10,13 @@ import { tick } from '@angular/core/testing';
   providedIn: 'root'
 })
 export class OmdbService {
+
   constructor(private constants: Constants, private http: HttpClient) { }
 
-  public async getSerch(s?: string, y?: string) {
-    let url = this.constants.API_ENDPOINT + "s=" + s;
+  public async getSerch(s?: string, y?: string, page:number = 1) {
+    let url = `${this.constants.API_ENDPOINT}s=${s}&page=${page}`;
     if (y) {
-    url += "&y=" + y;
+      url += `&y=${y}`;
     }
     const res = await lastValueFrom(this.http.get(url));
     return res as SerchGetResponse;
